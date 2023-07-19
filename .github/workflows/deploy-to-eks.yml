@@ -61,8 +61,10 @@ jobs:
 
     - name: Descargar archivo YAML del Deploy
       run: |
-        curl -L https://github.com/Devops-Grupo-8/DevOps/blob/main/payments-service-example%20Codigo%20Generado/deployment-${{ secrets.ENV }}.yml --output - > deployment-${{ secrets.ENV }}.yml
-        cat deployment-${{ secrets.ENV }}.yml
+        git clone https://github.com/Devops-Grupo-8/DevOps.git
+        cd DevOps
+        cp payments-service-example-codigo-generado/deployment-${{secrets.ENV}}.yml /
+        cat deployment-${{secrets.ENV}}.yml
 
     - name: Trigger deploy
       run: |
