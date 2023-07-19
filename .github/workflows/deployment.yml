@@ -75,3 +75,10 @@ spec:
                 name: ms-shipping-service
                 port:
                   number: 8080
+          - path: /payments
+            pathType: Prefix
+            backend:
+              service:
+                name: ms-payments-service
+                port:
+                  number: 8080
