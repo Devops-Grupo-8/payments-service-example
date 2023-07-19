@@ -63,7 +63,7 @@ jobs:
       run: |
         git clone https://github.com/Devops-Grupo-8/DevOps.git
         cd DevOps
-        cp payments-service-example-codigo-generado/deployment-${{secrets.ENV}}.yml ~/deployment-dev.yml
+        cp "payments-service-example-codigo-generado/deployment-${{secrets.ENV}}.yml" ~/deployment-dev.yml
         cat deployment-${{secrets.ENV}}.yml
 
     - name: Trigger deploy
