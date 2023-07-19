@@ -60,7 +60,7 @@ jobs:
 
     - name: Trigger deploy
       uses: ianbelcher/eks-kubectl-action@master
-        with:
-          eks_role_arn: ${{ secrets.ECR_REGISTRY }}
-          cluster_name: devops-grupo-8-DEV
-          args: set image --record deployment/pod-name pod-name=045017788685.dkr.ecr.us-east-1.amazonaws.com/payments-service-example:orders-service-example-dev
+      with:
+        eks_role_arn: ${{ secrets.ECR_REGISTRY }}
+        cluster_name: devops-grupo-8-DEV
+        args: set image --record deployment/pod-name pod-name=045017788685.dkr.ecr.us-east-1.amazonaws.com/payments-service-example:orders-service-example-dev
