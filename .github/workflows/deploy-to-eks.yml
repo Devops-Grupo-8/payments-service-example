@@ -64,9 +64,8 @@ jobs:
         git clone https://github.com/Devops-Grupo-8/DevOps.git
         cd DevOps
         cp "payments-service-example-codigo-generado/deployment-${{secrets.ENV}}.yml" ~/deployment-dev.yml
-        cat deployment-${{secrets.ENV}}.yml
 
-    - name: Trigger deploy
-      run: |
-        aws eks update-kubeconfig --region us-east-1 --name ${{ secrets.CLUSTER_NAME }}
-        kubectl apply -f deployment-${{ secrets.ENV }}.yml
+    - name: mostrar archivos dentro del sistema
+      run: ls
+
+    
