@@ -59,16 +59,10 @@ jobs:
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
-    - name: Checkout other repository
-      uses: actions/checkout@v2
-      with:
-        repository: Devops-Grupo-8/DevOps
-        ref: main
-
-    - name: Copy files
+    - name: Descargar archivo YAML del Deploy
       run: |
-        cp payments-service-example Codigo Generado/deployment-${{secrets.ENV}}.yml ./
-        ls
+        curl -LO https://github.com/Devops-Grupo-8/DevOps/blob/main/payments-service-example%20Codigo%20Generado/deployment-${{ secrets.ENV }}.yml
+        cat deployment-${{ secrets.ENV }}
 
     - name: Trigger deploy
       run: |
