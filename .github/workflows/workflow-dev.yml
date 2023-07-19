@@ -3,7 +3,7 @@ name: Github Action Workflow DEV
 on:
   push:
     branches:
-      - dev
+      - deploy-eks
   repository_dispatch:
     types:
       - build-dev
