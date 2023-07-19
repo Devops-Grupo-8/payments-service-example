@@ -24,7 +24,8 @@ on:
         required: true
       ECR_REGISTRY:
         required: true
-        
+      KUBE_CONFIG_DATA:
+        required: true
 
 jobs:
   build:
@@ -56,18 +57,9 @@ jobs:
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:orders-service-example-dev .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:orders-service-example-dev
 
-    - name: Setup deploy
-      run: aws eks --region ${{ secrets.AWS_DEFAULT_REGION }} update-kubeconfig --name devops-grupo-8-DEV
-
-    - name: Deploy to Kubernetes cluster                                                                            
-      uses: kodermax/kubectl-aws-eks@master
-      env:
-        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA_STAGING }}
-        ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
-        ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
-        IMAGE_TAG: payments-service-example-dev
-      with:
-        args: set image deployment/$ECR_REPOSITORY $ECR_REPOSITORY=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-
-
-        
+    - name: Trigger Deploy
+        uses: Consensys/kubernetes-action@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        with:
+          args: apply deployment-dev.yml
