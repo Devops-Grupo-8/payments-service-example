@@ -59,16 +59,7 @@ jobs:
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
-    - name: Descargar archivo YAML del Deploy
+    - name: Trigger deploy
       run: |
-        git clone https://github.com/Devops-Grupo-8/DevOps.git
-        cd DevOps
-        cp "payments-service-example-codigo-generado/deployment-${{secrets.ENV}}.yml" ~/deployment-dev.yml
-
-    - name: mostrar archivos dentro del sistema
-      run: |
-        cd devops
-        cd payments-service-example-codigo-generado
-        ls
-
-    
+        aws eks update-kubeconfig --region us-east-1 --name ${{ secrets.CLUSTER_NAME}}
+        kubectl apply -f deployment-${{ secrets.ENV }}.yml
