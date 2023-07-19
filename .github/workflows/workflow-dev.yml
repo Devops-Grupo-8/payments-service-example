@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   build-dev:
-    uses: Devops-Grupo-8/payments-service-example/.github/workflows/deploy-to-eks.yml@dev
+    uses: Devops-Grupo-8/payments-service-example/.github/workflows/deploy-to-eks.yml@deploy-eks
     with:
       CI_ENV: dev
       CONTENTFUL_ENVIRONMENT: 'dev'
