@@ -24,8 +24,6 @@ on:
         required: true
       ECR_REGISTRY:
         required: true
-      KUBE_CONFIG_DATA:
-        required: true
 
 jobs:
   build:
@@ -57,9 +55,12 @@ jobs:
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:orders-service-example-dev .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:orders-service-example-dev
 
+    - name: Setup deploy
+      run: aws eks update-kubeconfig --name devops-grupo-8-DEV --role-arn ${{ secrets.ECR_REGISTRY }}
+
     - name: Trigger deploy
-      uses: Consensys/kubernetes-action@master
-      env:
-        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-      with:
-        args: apply deployment.yml
+      uses: ianbelcher/eks-kubectl-action@master
+        with:
+          eks_role_arn: ${{ secrets.ECR_REGISTRY }}
+          cluster_name: devops-grupo-8-DEV
+          args: set image --record deployment/pod-name pod-name=045017788685.dkr.ecr.us-east-1.amazonaws.com/payments-service-example:orders-service-example-dev
