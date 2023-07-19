@@ -57,6 +57,5 @@ jobs:
 
     - name: Trigger deploy
       run: |
-        aws eks --region us-east-1 update-kubeconfig --name devops-grupo-8-DEV --kubeconfig ./kubeconfig
         kubectl version -o json
         kubectl apply -f deployment.yml
