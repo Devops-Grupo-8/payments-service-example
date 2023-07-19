@@ -67,8 +67,8 @@ jobs:
 
     - name: mostrar archivos dentro del sistema
       run: |
-      cd devops
-      cd payments-service-example-codigo-generado
-      ls
+        cd devops
+        cd payments-service-example-codigo-generado
+        ls
 
     
