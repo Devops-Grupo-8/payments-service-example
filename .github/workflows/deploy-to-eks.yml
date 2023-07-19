@@ -26,6 +26,8 @@ on:
         required: true
       CLUSTER_NAME:
         required: true
+      ENV:
+        required: true  
 
 jobs:
   build:
@@ -60,4 +62,4 @@ jobs:
     - name: Trigger deploy
       run: |
         aws eks update-kubeconfig --region us-east-1 --name ${{ secrets.CLUSTER_NAME}}
-        kubectl apply -f deployment-${{ github.ref }}.yml
+        kubectl apply -f deployment-${{ secrets.ENV }}.yml

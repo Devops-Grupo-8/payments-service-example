@@ -28,3 +28,4 @@ jobs:
       ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_ORDERS }}
       IMAGE_TAG: ${{ secrets.IMAGE_TAG_ORDERS_PROD }}
       CLUSTER_NAME: ${{ secrets.CLUSTER_NAME_PROD }}
+      ENV: prod
