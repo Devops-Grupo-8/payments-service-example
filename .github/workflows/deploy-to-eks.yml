@@ -59,4 +59,4 @@ jobs:
       run: |
         aws eks update-kubeconfig --region us-east-1 --name devops-grupo-8-DEV
         kubectl version -o json
-        kubectl apply -f ./deployment.yml
+        kubectl apply -f .github\workflows\deployment.yml
